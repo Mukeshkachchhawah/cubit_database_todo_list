@@ -30,11 +30,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Data Base or Cubit "),
+        title: Text("Cubit Todo List"),
       ),
       body: BlocBuilder<List_Cubit, State_Cubit>(builder: (context, state) {
         notes = state.arrdata;
-        return Padding(
+        return
+
+        //// Add GridView ///
+        /*  Padding(
           padding: const EdgeInsets.all(8.0),
           child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -83,34 +86,38 @@ class _HomePageState extends State<HomePage> {
               );
             },
           ),
-        );
+        );*/
 
-        /*  ListView.builder(
+          ListView.builder(
           itemCount: notes.length,
           itemBuilder: (context, index) {
             var currNote = state.arrdata[index];
             return 
-            Card(
-              child: InkWell(
-                onTap: () {
-                  BlocProvider.of<List_Cubit>(context).updateData(
-                      currNote["note_id"], "Update title", "Update Desc");
-                },
-                child: ListTile(
-                  leading: Text("${index + 1}"),
-                  title: Text("${currNote["title"]}", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-                  subtitle: Text("${currNote['desc']}"),
-                  trailing: InkWell(
-                      onTap: () {
-                        BlocProvider.of<List_Cubit>(context)
-                            .deletData(currNote["note_id"]);
-                      },
-                      child: Icon(Icons.delete)),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,MaterialPageRoute(builder: (context)=>Update(id: currNote["note_id"], name: currNote["title"],desc: currNote["desc"],)));
+
+
+                  },
+                  child: ListTile(
+                    leading: Text("${index + 1}"),
+                    title: Text("${currNote["title"]}", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                    subtitle: Text("${currNote['desc']}"),
+                    trailing: InkWell(
+                        onTap: () {
+                          BlocProvider.of<List_Cubit>(context)
+                              .deletData(currNote["note_id"]);
+                        },
+                        child: Icon(Icons.delete)),
+                  ),
                 ),
               ),
             );
           },
-        ); */
+        );
       }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -119,7 +126,7 @@ class _HomePageState extends State<HomePage> {
               MaterialPageRoute(
                 builder: (context) => Edit_Screen(),
               ));
-          //  context.read<List_Cubit>().addDataCubit("Flutter", "Hkgjdg");
+
         },
         child: Icon(Icons.add),
       ),

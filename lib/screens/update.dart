@@ -66,11 +66,7 @@ class _UpdateState extends State<Update> {
               height: 20,
             ),
 
-            ElevatedButton(onPressed: (){
-               var currNote;
-               BlocProvider.of<List_Cubit>(context).updateData(
-                      currNote["note_id"], titleController.text, descController.text);
-            }, child: Icon(Icons.update))
+
           ],
         ),
       ),
